@@ -7,7 +7,7 @@ var numQuestionsAsked = 0;
 var numCorrectGuesses = 0;
 var numWrongGuesses = 0;
 var numTimeouts = 0;
-var counter = 10; // time left
+var counter = 30; // time left
 var countingDown; // countdown timer
 var timeOut; // setTimeOut
 
@@ -37,7 +37,7 @@ $(".answers").on("click", function() {
     else {
         $("#answers").addClass("hidden");
         $("#time-remaining").addClass("hidden");
-        $("#message").html("<p>WRONG! You're a stinking pile of cubic wombat poop! The correct answer is " + rightAnswer + ".</p>");
+        $("#message").html("<p>WRONG! You're a stinking pile of cubic wombat poop! The correct answer is " + "<strong>" + rightAnswer + "</strong>" + ".</p>");
         $("#message").removeClass("hidden");
         $("#time-remaining").addClass("hidden");
         numWrongGuesses++;
@@ -56,7 +56,7 @@ $("#restart").on("click", function() {
     currentQuestion = undefined;
     rightAnswer = undefined;
     isCorrect = undefined;
-    counter = 10;
+    counter = 30;
     numQuestionsAsked = 0;
     numCorrectGuesses = 0;
     numWrongGuesses = 0;
@@ -79,41 +79,30 @@ function showQuestion() {
     $("#answer-D").html(questionAnswers[currentQuestion].answers.answerD);
     $("#answer-D").attr("value", questionAnswers[currentQuestion].answers.answerD);
     rightAnswer = questionAnswers[currentQuestion].correctAnswer;
-
-
-    /*for (i = 0; i < Object.keys(questionAnswers).length; i++) {
-        $.each(questionAnswers, function(i, value) {
-            currentQuestion = questionAnswers[i].question.val;
-            rightAnswer = questionAnswers.i.correctAnswer.val;
-            $("#question").html(currentQuestion);
-            $("#answer-A").html(questionAnswers[i].answers.answerA.val);
-            $("#answer-B").html(questionAnswers[i].answers.answerB.val);
-            $("#answer-C").html(questionAnswers[i].answers.answerC.val);
-            $("#answer-D").html(questionAnswers[i].answers.answerD.val);
-        })
-    }*/
 }
 
 // all following questions
 function nextQuestion() {
     isCorrect = undefined;
+    currentQuestion++;
     resetTimer();
 }
 
 function resetTimer() {
-    counter = 10;
+    counter = 30;
     timeout = setTimeout(function() {
         $("#message").addClass("hidden");
         $("#answers").removeClass("hidden");
         $("#time-remaining").removeClass("hidden");
         countdown();
+        showQuestion();
         },
         3000
     );
 }
 
 function countdown() {
-    counter = 10;
+    counter = 30;
     countingDown = setInterval(function() {
         $("#timer").html("Time remaining: " + counter + " seconds");
         if (counter < 0) {
@@ -165,14 +154,14 @@ function countdown() {
 function timeoutMessage() {
     $("#answers").addClass("hidden");
     $("#time-remaining").addClass("hidden");
-    $("#message").html("<p>You ran out of time, you indecisive garden snail! The correct answer is " + rightAnswer + ".</p>");
+    $("#message").html("<p>You ran out of time, you indecisive garden snail! The correct answer is " + "<strong>" + rightAnswer + "</strong>" + ".</p>");
     $("#message").removeClass("hidden");
 }
 
 // shows result at end of game
 function gameOver() {
     isCorrect = undefined;
-    counter = 11;
+    counter = 30;
     $("#time-remaining").addClass("hidden");
     $("#question").addClass("hidden");
     $("#answers").addClass("hidden");

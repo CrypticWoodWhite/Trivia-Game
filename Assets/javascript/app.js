@@ -1,7 +1,6 @@
 // GLOBAL VARIABLES
-// list of questions and answers is inside data.js
 var guess;
-var question;
+var currentQuestion = 0; // current question
 var rightAnswer;
 var isCorrect; // boolean
 var numQuestionsAsked = 0;
@@ -24,8 +23,8 @@ $("#startButton").on("click", function() {
 })
 
 // what happens when you click a guess
-$(".answers").on("click", function(e) {
-    guess = $(this).attr("id");
+$(".answers").on("click", function() {
+    guess = $(this).val();
     console.log("click! you guessed " + guess);
     if (guess === rightAnswer) {
         $("#message").html("<p>You guessed right, you shimmering rainbow unicorn!</p>");
@@ -54,7 +53,7 @@ $("#restart").on("click", function() {
     $("#question").removeClass("hidden");
     $("#answers").removeClass("hidden");
     guess = undefined;
-    question = undefined;
+    currentQuestion = undefined;
     rightAnswer = undefined;
     isCorrect = undefined;
     counter = 10;
@@ -70,17 +69,29 @@ $("#restart").on("click", function() {
 
 // shows the first question
 function showQuestion() {
-    for (i = 0; i < Object.keys(questionAnswers).length; i++) {
+    $("#question").html(questionAnswers[currentQuestion].question);
+    $("#answer-A").html(questionAnswers[currentQuestion].answers.answerA);
+    $("#answer-A").attr("value", questionAnswers[currentQuestion].answers.answerA);
+    $("#answer-B").html(questionAnswers[currentQuestion].answers.answerB);
+    $("#answer-B").attr("value", questionAnswers[currentQuestion].answers.answerB);
+    $("#answer-C").html(questionAnswers[currentQuestion].answers.answerC);
+    $("#answer-C").attr("value", questionAnswers[currentQuestion].answers.answerC);
+    $("#answer-D").html(questionAnswers[currentQuestion].answers.answerD);
+    $("#answer-D").attr("value", questionAnswers[currentQuestion].answers.answerD);
+    rightAnswer = questionAnswers[currentQuestion].correctAnswer;
+
+
+    /*for (i = 0; i < Object.keys(questionAnswers).length; i++) {
         $.each(questionAnswers, function(i, value) {
-            question = questionAnswers[i].question.val;
+            currentQuestion = questionAnswers[i].question.val;
             rightAnswer = questionAnswers.i.correctAnswer.val;
-            $("#question").html(question);
+            $("#question").html(currentQuestion);
             $("#answer-A").html(questionAnswers[i].answers.answerA.val);
             $("#answer-B").html(questionAnswers[i].answers.answerB.val);
             $("#answer-C").html(questionAnswers[i].answers.answerC.val);
             $("#answer-D").html(questionAnswers[i].answers.answerD.val);
         })
-    }
+    }*/
 }
 
 // all following questions

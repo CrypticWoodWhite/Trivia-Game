@@ -7,6 +7,9 @@
 4. Keep on going until the end
 5. Once the game is over, you can start over by hitting the start over button
 
+### Tools and technologies
+HTML/CSS, JavaScript, JQuery, timers
+
 ### Links
 1. GitHub repository: https://github.com/CrypticWoodWhite/Trivia-Game
 2. GitPages: https://crypticwoodwhite.github.io/Trivia-Game/
